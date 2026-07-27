@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Gated registration configuration - never readable by clients directly
+    match /config/registration {
+      allow read: if false;
+      allow write: if request.auth != null; // only admins can rotate/update the access code
+    }
+
+    // Players collection
+    match /players/{playerId} {
+      // Anyone can browse players and read their stats
+      allow read: if true;
+      
+      // Players can register by presenting the correct club code
+      allow create: if request.resource.data.accessCode == get(/databases/$(database)/documents/config/registration).data.accessCode;
+      
+      // Allow updating profiles (either authenticated admins, or the registration step removing the access code)
+      allow update: if request.auth != null || (
+        !('accessCode' in request.resource.data) && ('accessCode' in resource.data)
+      );
+      
+      // Only authenticated admins can delete player records
+      allow delete: if request.auth != null;
+    }
+
+    // Matches and nested subcollections
+    match /matches/{matchId} {
+      allow read, write: if true; // Public reads, and writes permitted for scoring/updates
+      
+      // Match-scoped squads subcollection path
+      match /squads/{teamId}/players/{playerId} {
+        allow read, write: if true;
+      }
+    }
+    
+    // Fallback for other collections (teams, posts, etc.)
+    match /teams/{teamId} {
+      allow read, write: if true;
+    }
+    
+    match /posts/{postId} {
+      allow read, write: if true;
+    }
+  }
+}

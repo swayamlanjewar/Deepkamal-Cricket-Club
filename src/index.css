@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Outfit", "Inter", system-ui, sans-serif;
+}
+
+/* Custom scrollbar for high-end feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Stadium theme styles */
+.gradient-header-day {
+  background: linear-gradient(135deg, #fef08a 0%, #38bdf8 40%, #1e3a8a 100%);
+}
+
+.gradient-header-night {
+  background: linear-gradient(135deg, #020617 0%, #0f172a 40%, #1e1b4b 70%, #0d9488 100%);
+}
+
+/* Subtle visual animations */
+@keyframes pop {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-pop {
+  animation: pop 0.15s ease-out forwards;
+}
+
+@keyframes flash-red {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: rgba(239, 68, 68, 0.2); }
+}
+
+.animate-flash-red {
+  animation: flash-red 0.5s ease-in-out;
+}
