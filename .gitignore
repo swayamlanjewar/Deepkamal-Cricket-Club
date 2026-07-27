@@ -29,3 +29,8 @@ local-backup/
 firebase-debug.log
  firestore-debug.log
  ui-debug.log
+
+# Local environment credentials and keys
+.env.production
+service-account-prod.json
+

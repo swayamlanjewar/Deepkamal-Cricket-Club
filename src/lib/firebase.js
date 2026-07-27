@@ -36,19 +36,19 @@ if (isConfigValid) {
     auth = getAuth(app);
     storage = getStorage(app);
     
-    const isDevelopment = import.meta.env.DEV;
-    const isLocalhost = typeof window !== "undefined" && 
-      (window.location.hostname === "localhost" || 
-       window.location.hostname === "127.0.0.1" || 
-       window.location.hostname.startsWith("192.168."));
+    const useEmulator = import.meta.env.VITE_USE_FIREBASE_EMULATOR === "true" || 
+      (import.meta.env.DEV && typeof window !== "undefined" && 
+       (window.location.hostname === "localhost" || 
+        window.location.hostname === "127.0.0.1" || 
+        window.location.hostname.startsWith("192.168.")));
 
-    if (isDevelopment && isLocalhost) {
+    if (useEmulator) {
       connectFirestoreEmulator(db, "localhost", 8080);
       connectAuthEmulator(auth, "http://localhost:9099");
       connectStorageEmulator(storage, "localhost", 9199);
       console.log("Connected to Firebase Local Emulator Suite!");
     } else {
-      console.log("Firebase initialized successfully using configured environment variables!");
+      console.log("Connected to Firebase Cloud Project:", firebaseConfig.projectId);
     }
   } catch (error) {
     console.error("Error initializing Firebase:", error);
