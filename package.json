@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "emulators": "npx firebase emulators:start --import=./local-backup --export-on-exit=./local-backup",
+    "emulators": "npx firebase emulators:start --import=./local-backup --export-on-exit=./local-backup --project=monsoon-test-tournament",
     "sync-db": "node scripts/sync-db.cjs"
   },
   "dependencies": {

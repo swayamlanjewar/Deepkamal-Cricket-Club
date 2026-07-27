@@ -26,12 +26,12 @@ async function main() {
   }, 'production');
   const prodDb = getFirestore(prodApp);
   
-  console.log('Initializing connection to local emulator (127.0.0.1:8080)...');
+  console.log('Initializing connection to local emulator (127.0.0.1:8085)...');
   // Initialize local emulator connection directly using the Firestore constructor
   const localDb = new Firestore({
     projectId: serviceAccount.project_id,
     host: '127.0.0.1',
-    port: 8080,
+    port: 8085,
     ssl: false,
     credentials: {
       client_email: 'local-dev@emulator.local',
@@ -97,7 +97,7 @@ async function main() {
     }
     
     console.log('\n\x1b[32m%s\x1b[0m', `Success! Synchronized ${docCount} documents into the local emulator Firestore.`);
-    console.log('You can now see the data in your emulator UI (usually at http://localhost:4000).');
+    console.log('You can now see the data in your emulator UI (usually at http://localhost:4005).');
     
   } catch (error) {
     console.error('\n\x1b[31m%s\x1b[0m', 'An error occurred during synchronization:');

@@ -43,9 +43,9 @@ if (isConfigValid) {
         window.location.hostname.startsWith("192.168.")));
 
     if (useEmulator) {
-      connectFirestoreEmulator(db, "localhost", 8080);
-      connectAuthEmulator(auth, "http://localhost:9099");
-      connectStorageEmulator(storage, "localhost", 9199);
+      connectFirestoreEmulator(db, "localhost", 8085);
+      connectAuthEmulator(auth, "http://localhost:9090");
+      connectStorageEmulator(storage, "localhost", 9195);
       console.log("Connected to Firebase Local Emulator Suite!");
     } else {
       console.log("Connected to Firebase Cloud Project:", firebaseConfig.projectId);
